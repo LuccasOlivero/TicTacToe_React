@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.css";
+import { useState } from "react";
 
-function App() {
+const TURNS = {
+  X: "x",
+  O: "o",
+};
+
+export default function App() {
+  return <Main></Main>;
+}
+
+function Main() {
+  const [board, setBoard] = useState(["", "", "", "", "", "", "", "", ""]);
+  const [activePlayer, setActivePlayer] = useState(false);
+
+  function handleTurn() {
+    setActivePlayer(() => !activePlayer);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="board test">
+      <h1>Tic tac toe</h1>
+      <section className="game">
+        {board.map((_, i) => {
+          return (
+            <Square
+              key={i}
+              index={i}
+              onClick={handleTurn}
+              activePlayer={activePlayer}
+            ></Square>
+          );
+        })}
+      </section>
+    </main>
   );
 }
 
-export default App;
+function Square({ children, updateBoard, index, onClick, activePlayer }) {
+  return (
+    <div className="square" onClick={onClick}>
+      {activePlayer ? TURNS.X : TURNS.O}
+    </div>
+  );
+}

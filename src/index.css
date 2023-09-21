@@ -1,13 +1,360 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Fredericka+the+Great&family=Irish+Grover&family=Roboto:wght@300&family=Sofia&family=Titan+One&display=swap");
+
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  background: #394867;
+  color-scheme: light dark;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  display: flex;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.board {
+  width: fit-content;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.board h1 {
+  color: #eee;
+  margin-bottom: 16px;
+}
+.board button {
+  padding: 8px 12px;
+  margin: 25px;
+  background: transparent;
+  border: 2px solid #eee;
+  color: #eee;
+  width: 100px;
+  border-radius: 5px;
+  transition: 0.2s;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.board button:hover {
+  background: #eee;
+  color: #222;
+}
+
+.board .game {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.turn {
+  display: flex;
+  justify-content: center;
+  margin: 15px auto;
+  width: fit-content;
+  position: relative;
+  border-radius: 10px;
+}
+
+.turn .square,
+.winner .square {
+  width: 70px;
+  height: 70px;
+  pointer-events: none;
+  border-color: transparent;
+}
+
+.square.is-selected {
+  color: #fff;
+  background: #09f;
+}
+
+.winner {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.setNames {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.ingresenNombres {
+  padding: 10px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+.winner .text {
+  background: #111;
+  height: 450px;
+  width: 350px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.setNames .text {
+  background: #111;
+  height: 65%;
+  width: 350px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.winner .win {
+  margin: 0 auto;
+  width: fit-content;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  display: flex;
+  gap: 15px;
+}
+
+.winnerName {
+  text-transform: uppercase;
+}
+
+.square {
+  width: 100px;
+  height: 100px;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 48px;
+}
+
+.pantallaInicial {
+  border-radius: 10px;
+  width: fit-content;
+  text-align: center;
+  justify-content: center;
+  min-width: 30hv;
+  min-height: 1vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+}
+.opciones {
+  background: #6b6b8b;
+  padding: 30px;
+  margin-top: 10px;
+  border-radius: 15px;
+  justify-content: center;
+  min-width: 100hv;
+  min-height: 1vh;
+}
+
+.opcion {
+  font-family: "Irish Grover", cursive;
+  display: block;
+  border-radius: 75px;
+  background: #212a3e;
+  width: 450px;
+  padding: 10px;
+  border-style: none;
+  align-items: center;
+  text-align: center;
+  line-height: 200%;
+  text-decoration: none;
+  font-size: 250%;
+  margin: auto auto;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  color: white;
+}
+.opcion:hover {
+  background: #6f95ff;
+  cursor: pointer;
+}
+.tituloModoJuego {
+  font-family: "Fredericka the Great", cursive;
+  text-align: center;
+  font-size: 200%;
+  margin: auto auto;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  color: #dce0e6;
+  line-height: 10px;
+}
+.tituloTictactoe {
+  font-family: "Titan One", cursive;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5%;
+  font-size: 450%;
+  color: #200e38;
+  background: #fff8d6;
+}
+
+.nombres {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  text-transform: uppercase;
+  border-radius: 20px;
+  background: #09f;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  margin: auto;
+}
+.nombre1 {
+  background: #200e38;
+}
+.nombre2 {
+  background: #6b6b8b;
+}
+.nombreJugador {
+  padding: 10px;
+  margin-top: 0px;
+}
+.volverButon {
+  display: block;
+  padding: 0;
+}
+.empezarButon {
+  display: block;
+}
+.simbolo {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.avisoOnline {
+  margin: 10px;
+  text-align: center;
+
+  padding-top: 50%;
+  margin-bottom: 10px;
+}
+.botonOnline {
+  width: 100px;
+  padding: 20px;
+  color: black;
+  background: #09f;
+  border-style: none;
+  border-radius: 15px;
+  margin: auto;
+  margin-left: 40%;
+}
+.botonOnline:hover {
+  background: #200e38;
+  color: white;
+  cursor: pointer;
+}
+
+/* Media queries para pantallas de dispositivos móviles */
+@media screen and (max-width: 600px) {
+  .opcion {
+    width: 90%; /* Ajusta el ancho al 100% de la pantalla */
+    font-size: 150%; /* Reduce el tamaño de fuente */
+  }
+
+  .tituloTictactoe {
+    font-size: 300%; /* Reduce el tamaño de fuente */
+    padding: 10px;
+    margin: 10px;
+  }
+  .opciones {
+    padding: 10px;
+    margin: 10px;
+    width: 350px;
+    height: 500px;
+    margin: auto;
+  }
+  .botonesModo {
+    padding-top: 10px;
+    margin-top: 5%;
+  }
+  .tituloModoJuego {
+    font-size: 250%;
+    line-height: 40px;
+    padding: 0;
+    padding-top: 0px;
+    margin-top: 40px;
+  }
+  .pantallaInicial {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+  }
+  .setNames {
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 1);
+  }
+  .setNames .text {
+    background: #111;
+    border: 2px solid #eee;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .board {
+    width: fit-content;
+    margin: 40% auto;
+    text-align: center;
+  }
+  .nombre1 {
+    background: #200e38;
+    max-width: 30%;
+  }
+  .nombre2 {
+    background: #6b6b8b;
+    max-width: 30%;
+  }
 }
