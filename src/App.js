@@ -6,7 +6,6 @@ const TURNS = {
   X: "x",
   O: "o",
 };
-
 const WINNER_COMPS = [
   [0, 1, 2], // primera fila
   [3, 4, 5], // segunda fila
@@ -82,6 +81,7 @@ export default function App() {
     setBoard(Array(9).fill(null));
     setTurn(TURNS.X);
     setWinner(null);
+    window.localStorage.clear();
   }
 
   return (
@@ -105,11 +105,13 @@ export default function App() {
       {winner !== null && (
         <section className="winner">
           <div className="text">
-            <h2>{winner === false ? "Draw" : "Winner:"}</h2>
+            <h2>{winner === false ? "It´s a draw!" : "Winner!"}</h2>
 
-            <header className="win">
-              {winner && <Square>{winner}</Square>}
-            </header>
+            {winner && (
+              <header className="win">
+                <Square>{winner}</Square>
+              </header>
+            )}
 
             <footer>
               <button onClick={resetGame}>Try again</button>
@@ -117,6 +119,9 @@ export default function App() {
           </div>
         </section>
       )}
+      <button className="restart" onClick={resetGame}>
+        Restart
+      </button>
     </main>
   );
 }
