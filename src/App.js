@@ -58,10 +58,6 @@ export default function App() {
     setBoard(newBoard);
     // console.log(newBoard);
 
-    //cambiar el turno
-    const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
-    setTurn(newTurn);
-
     //guardar datos en localStorage
     window.localStorage.setItem("board", JSON.stringify(newBoard));
     window.localStorage.setItem("turn", newTurn);
