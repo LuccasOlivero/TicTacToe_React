@@ -7,7 +7,7 @@ const TURNS = {
   O: "o",
 };
 
-const WINNER_COMBOS = [
+const WINNER_COMPS = [
   [0, 1, 2], // primera fila
   [3, 4, 5], // segunda fila
   [6, 7, 8], // tercera fila
@@ -31,11 +31,11 @@ export default function App() {
   });
   const [winner, setWinner] = useState(null);
 
-  //check si X u O ganó
+  //Check if there are a winner
   function checkWinner(boardToCheck) {
     let winner = null;
 
-    WINNER_COMBOS.forEach((combo) => {
+    WINNER_COMPS.forEach((combo) => {
       const [a, b, c] = combo;
       if (
         boardToCheck[a] &&
@@ -48,37 +48,33 @@ export default function App() {
   }
 
   function updateBoard(i) {
-    // console.log(Boolean(board[i]));
-    if (board[i] || winner) return; // checkear si el board en posision del index tiene X u O se retorna y no se puede hcaer click en mismo
+    if (board[i] || winner) return; // if in the board there is an "X" or "O" in the same position of click or there is an winner, return
 
-    //actualizar el tablero
+    //updating board
     const newBoard = [...board];
     newBoard[i] = turn;
-
     setBoard(newBoard);
-    // console.log(newBoard);
 
-    //cambiar el turno
+    //change turn
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X;
     setTurn(newTurn);
 
-    //guardar datos en localStorage
+    //save data in localStorage
     window.localStorage.setItem("board", JSON.stringify(newBoard));
     window.localStorage.setItem("turn", newTurn);
 
-    // ver si hay un ganador
+    //if there is an winner or it´s a draw, end game
     const newWinner = checkWinner(newBoard);
     if (newWinner) {
       confettty();
-      // console.log(newWinner);
       setWinner(() => newWinner);
     } else if (checkEndGame(newBoard)) {
       setWinner(false); // draw
     }
   }
 
+  //if the board is full, it is a draw
   function checkEndGame(newBoard) {
-    //check si no hay mas espacios null en el tablero por lo tanto, draw
     return newBoard.every((square) => square !== null);
   }
 
